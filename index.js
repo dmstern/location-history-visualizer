@@ -1,5 +1,5 @@
 ( function ( $, L, prettySize ) {
-	var map, heat,
+	var map, heat, graph,
 		heatOptions = {
 			tileOpacity: 1,
 			heatOpacity: 1,
@@ -41,6 +41,7 @@
 
 	function stageTwo ( file ) {
 		heat = L.heatLayer( [], heatOptions ).addTo( map );
+		graph = L.polyline( [], {color: 'red'}).addTo(map);
 
 		// First, change tabs
 		$( 'body' ).addClass( 'working' );
@@ -113,9 +114,12 @@
 					return;
 				}
 
-				heat._latlngs = latlngs;
-
-				heat.redraw();
+				// heat._latlngs = latlngs;
+				// heat.redraw();
+				
+				graph._latlngs = latlngs;
+				graph.redraw();
+				
 				stageThree( /* numberProcessed */ latlngs.length );
 			};
 
